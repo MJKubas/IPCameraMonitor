@@ -1,0 +1,39 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="550.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.261" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <TabPane fx:id="tabs" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="900.0">
+        <Tab closable="false" text="Live view all">
+            <ScrollPane onContextMenuRequested="#hideShowNotPreviewed" prefHeight="200.0" prefWidth="200.0">
+                <FlowPane fx:id="currentFrame" />
+            </ScrollPane>
+        </Tab>
+        <Tab closable="false" text="Live view selected">
+            <ScrollPane fx:id="liveViewOne" prefHeight="200.0" prefWidth="200.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+            </ScrollPane>
+        </Tab>
+        <Tab closable="false" text="Info">
+            <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Designed and developed by Michal Kubas">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+                <padding>
+                    <Insets left="10.0" top="10.0"/>
+                </padding>
+            </Label>
+        </Tab>
+    </TabPane>
+    <ImageView fx:id="addButton" accessibleRole="BUTTON" fitHeight="100.0" fitWidth="100.0" onMouseClicked="#newStreamPopUp" onMouseEntered="#addHoverOn" onMouseExited="#addHoverOff" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_RIGHT">
+        <Image url="@../resources/images/Add.png" />
+    </ImageView>
+</StackPane>
