@@ -12,6 +12,13 @@ public class CameraControl {
         this.leftControl = LeftControl;
         this.rightControl = RightControl;
     }
+    public CameraControl(String CameraUrl){
+        this.controlUrl = CameraUrl.replace("/mjpg", "/control");
+        this.downControl = "?pan=plus";
+        this.upControl = "?pan=minus";
+        this.leftControl = "?tilt=plus";
+        this.rightControl = "?tilt=minus";
+    }
 
     public enum direction{
         up,

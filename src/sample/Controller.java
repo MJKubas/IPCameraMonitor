@@ -331,33 +331,33 @@ public class Controller implements Initializable {
         CheckBox control = new CheckBox("Enable camera move control");
         TextField controlUrl = new TextField(stream.getCameraControl().getControlUrl());
         controlUrl.setDisable(true);
-        TextField upControl = new TextField(stream.getCameraControl().getUpControl());
-        upControl.setDisable(true);
-        TextField downControl = new TextField(stream.getCameraControl().getDownControl());
-        downControl.setDisable(true);
-        TextField leftControl = new TextField(stream.getCameraControl().getLeftControl());
-        leftControl.setDisable(true);
-        TextField rightControl = new TextField(stream.getCameraControl().getRightControl());
-        rightControl.setDisable(true);
-        control.setOnMouseClicked(handler -> {
-            if(control.isSelected()){
-                controlUrl.setDisable(false);
-                upControl.setDisable(false);
-                downControl.setDisable(false);
-                leftControl.setDisable(false);
-                rightControl.setDisable(false);
-            }
-            else{
-                controlUrl.setDisable(true);
-                upControl.setDisable(true);
-                downControl.setDisable(true);
-                leftControl.setDisable(true);
-                rightControl.setDisable(true);
-            }
-        });
+//        TextField upControl = new TextField(stream.getCameraControl().getUpControl());
+//        upControl.setDisable(true);
+//        TextField downControl = new TextField(stream.getCameraControl().getDownControl());
+//        downControl.setDisable(true);
+//        TextField leftControl = new TextField(stream.getCameraControl().getLeftControl());
+//        leftControl.setDisable(true);
+//        TextField rightControl = new TextField(stream.getCameraControl().getRightControl());
+//        rightControl.setDisable(true);
+//        control.setOnMouseClicked(handler -> {
+//            if(control.isSelected()){
+//                controlUrl.setDisable(false);
+//                upControl.setDisable(false);
+//                downControl.setDisable(false);
+//                leftControl.setDisable(false);
+//                rightControl.setDisable(false);
+//            }
+//            else{
+//                controlUrl.setDisable(true);
+//                upControl.setDisable(true);
+//                downControl.setDisable(true);
+//                leftControl.setDisable(true);
+//                rightControl.setDisable(true);
+//            }
+//        });
 
-        //popUpConfiguration(urlField, nameField, preview, record, detect, duration, dialog.getDialogPane());
-        popUpConfiguration(urlField, nameField, preview, record, detect, duration, dialog.getDialogPane(), controlUrl, upControl, downControl, leftControl, rightControl, control);
+        popUpConfiguration(urlField, nameField, preview, record, detect, duration, dialog.getDialogPane(), control);
+        //popUpConfiguration(urlField, nameField, preview, record, detect, duration, dialog.getDialogPane(), controlUrl, upControl, downControl, leftControl, rightControl, control);
 
 
         dialog.setResultConverter(button -> {
@@ -387,10 +387,10 @@ public class Controller implements Initializable {
                 }
             }
             stream.getCameraControl().setControlUrl(controlUrl.getText());
-            stream.getCameraControl().setUpControl(upControl.getText());
-            stream.getCameraControl().setDownControl(downControl.getText());
-            stream.getCameraControl().setLeftControl(leftControl.getText());
-            stream.getCameraControl().setRightControl(rightControl.getText());
+//            stream.getCameraControl().setUpControl(upControl.getText());
+//            stream.getCameraControl().setDownControl(downControl.getText());
+//            stream.getCameraControl().setLeftControl(leftControl.getText());
+//            stream.getCameraControl().setRightControl(rightControl.getText());
             if(stream.getIsPreviewed() != preview.isSelected()){
                 if(!preview.isSelected()){
                     currentFrame.getChildren().remove(cameraNLabel.getKey());
@@ -417,10 +417,12 @@ public class Controller implements Initializable {
         });
     }
 
+//    private static void popUpConfiguration(TextField urlField, TextField nameField, CheckBox preview, CheckBox record,
+//                                           CheckBox detect, ChoiceBox<Integer> duration, DialogPane dialogPane,
+//                                           TextField controlUrl, TextField upControl, TextField downControl,
+//                                           TextField leftControl, TextField rightControl, CheckBox control) {
     private static void popUpConfiguration(TextField urlField, TextField nameField, CheckBox preview, CheckBox record,
-                                           CheckBox detect, ChoiceBox<Integer> duration, DialogPane dialogPane,
-                                           TextField controlUrl, TextField upControl, TextField downControl,
-                                           TextField leftControl, TextField rightControl, CheckBox control) {
+                                       CheckBox detect, ChoiceBox<Integer> duration, DialogPane dialogPane, CheckBox control) {
         GridPane grid = new GridPane();
         grid.setHgap(15);
         grid.setVgap(15);
@@ -430,20 +432,20 @@ public class Controller implements Initializable {
         grid.add(urlField, 1, 1);
         grid.add(preview, 0, 2);
         grid.add(record, 0, 3);
-        grid.add(detect, 0, 4);
-        grid.add(control, 0, 5);
-        grid.add(new Label("Record loop duration: (min)"), 0, 6);
-        grid.add(duration, 1, 6);
-        grid.add(new Label("URL for GET request: "), 0, 7);
-        grid.add(controlUrl, 1, 7);
-        grid.add(new Label("GET request-go up: "), 0, 8);
-        grid.add(upControl, 1, 8);
-        grid.add(new Label("GET request-go down: "), 0, 9);
-        grid.add(downControl, 1, 9);
-        grid.add(new Label("GET request-go left: "), 0, 10);
-        grid.add(leftControl, 1, 10);
-        grid.add(new Label("GET request-go right: "), 0, 11);
-        grid.add(rightControl, 1, 11);
+        grid.add(new Label("Record loop duration: (min)"), 0, 4);
+        grid.add(duration, 1, 4);
+        grid.add(detect, 0, 5);
+        grid.add(control, 0, 6);
+//        grid.add(new Label("URL for GET request: "), 0, 7);
+//        grid.add(controlUrl, 1, 7);
+//        grid.add(new Label("GET request-go up: "), 0, 8);
+//        grid.add(upControl, 1, 8);
+//        grid.add(new Label("GET request-go down: "), 0, 9);
+//        grid.add(downControl, 1, 9);
+//        grid.add(new Label("GET request-go left: "), 0, 10);
+//        grid.add(leftControl, 1, 10);
+//        grid.add(new Label("GET request-go right: "), 0, 11);
+//        grid.add(rightControl, 1, 11);
         dialogPane.setContent(grid);
     }
 
@@ -463,35 +465,36 @@ public class Controller implements Initializable {
         CheckBox record = new CheckBox("Enable recording ");
         CheckBox detect = new CheckBox("Enable motion detection");
         CheckBox control = new CheckBox("Enable camera move control");
-        TextField controlUrl = new TextField();
-        controlUrl.setDisable(true);
-        TextField upControl = new TextField();
-        upControl.setDisable(true);
-        TextField downControl = new TextField();
-        downControl.setDisable(true);
-        TextField leftControl = new TextField();
-        leftControl.setDisable(true);
-        TextField rightControl = new TextField();
-        rightControl.setDisable(true);
+//        TextField controlUrl = new TextField();
+//        controlUrl.setDisable(true);
+//        TextField upControl = new TextField();
+//        upControl.setDisable(true);
+//        TextField downControl = new TextField();
+//        downControl.setDisable(true);
+//        TextField leftControl = new TextField();
+//        leftControl.setDisable(true);
+//        TextField rightControl = new TextField();
+//        rightControl.setDisable(true);
         ChoiceBox<Integer> duration = new ChoiceBox<>(recordDuration);
         duration.setValue(5);
-        control.setOnMouseClicked(handler -> {
-            if(control.isSelected()){
-                controlUrl.setDisable(false);
-                upControl.setDisable(false);
-                downControl.setDisable(false);
-                leftControl.setDisable(false);
-                rightControl.setDisable(false);
-            }
-            else{
-                controlUrl.setDisable(true);
-                upControl.setDisable(true);
-                downControl.setDisable(true);
-                leftControl.setDisable(true);
-                rightControl.setDisable(true);
-            }
-        });
-        popUpConfiguration(urlField, nameField, preview, record, detect, duration, dialog.getDialogPane(), controlUrl, upControl, downControl, leftControl, rightControl, control);
+//        control.setOnMouseClicked(handler -> {
+//            if(control.isSelected()){
+//                controlUrl.setDisable(false);
+//                upControl.setDisable(false);
+//                downControl.setDisable(false);
+//                leftControl.setDisable(false);
+//                rightControl.setDisable(false);
+//            }
+//            else{
+//                controlUrl.setDisable(true);
+//                upControl.setDisable(true);
+//                downControl.setDisable(true);
+//                leftControl.setDisable(true);
+//                rightControl.setDisable(true);
+//            }
+//        });
+        //popUpConfiguration(urlField, nameField, preview, record, detect, duration, dialog.getDialogPane(), controlUrl, upControl, downControl, leftControl, rightControl, control);
+        popUpConfiguration(urlField, nameField, preview, record, detect, duration, dialog.getDialogPane(), control);
 
         dialog.setResultConverter(button -> {
             if(button == addButtonType){
@@ -529,10 +532,14 @@ public class Controller implements Initializable {
             }
             if(toAdd) {
                 CameraControl cameraControl;
-                if(controlUrl.getText().equals("")){
-                    cameraControl = null;
+                if(control.isSelected()){
+                    cameraControl = new CameraControl(urlField.getText());
                 }
-                else cameraControl = new CameraControl(controlUrl.getText(), upControl.getText(), downControl.getText(), leftControl.getText(), rightControl.getText());
+                else cameraControl = null;
+                //if(controlUrl.getText().equals("")){
+                    //cameraControl = null;
+                //}
+                //else cameraControl = new CameraControl(controlUrl.getText(), upControl.getText(), downControl.getText(), leftControl.getText(), rightControl.getText());
                 StreamGet streamGet = new StreamGet(nameField.getText(), urlField.getText(), preview.isSelected(), record.isSelected(), detect.isSelected(), duration.getValue(), cameraControl);
                 try {
                     addNewStream(streamGet);
