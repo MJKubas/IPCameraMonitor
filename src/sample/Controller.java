@@ -95,7 +95,10 @@ public class Controller implements Initializable {
 
         displayNControls.getChildren().addAll(display, controlButtons);
         displayNControls.setAlignment(Pos.CENTER_RIGHT);
-        displayNCamControls.getChildren().addAll(displayCopy, camControlButtons);
+        displayNCamControls.getChildren().add(displayCopy);
+        if(stream.getCameraControl()!=null){
+            displayNCamControls.getChildren().add(camControlButtons);
+        }
 
         displayNControlsNLabel.getChildren().addAll(displayNControls, label);
         displayNControlsNLabel.setAlignment(Pos.CENTER);
@@ -329,8 +332,9 @@ public class Controller implements Initializable {
         duration.setValue(stream.getRecordLoop());
         duration.setDisable(true);
         CheckBox control = new CheckBox("Enable camera move control");
-        TextField controlUrl = new TextField(stream.getCameraControl().getControlUrl());
-        controlUrl.setDisable(true);
+        control.setSelected(stream.getCameraControl() != null);
+//        TextField controlUrl = new TextField(stream.getCameraControl().getControlUrl());
+//        controlUrl.setDisable(true);
 //        TextField upControl = new TextField(stream.getCameraControl().getUpControl());
 //        upControl.setDisable(true);
 //        TextField downControl = new TextField(stream.getCameraControl().getDownControl());
@@ -386,7 +390,7 @@ public class Controller implements Initializable {
                     //break;
                 }
             }
-            stream.getCameraControl().setControlUrl(controlUrl.getText());
+//            stream.getCameraControl().setControlUrl(controlUrl.getText());
 //            stream.getCameraControl().setUpControl(upControl.getText());
 //            stream.getCameraControl().setDownControl(downControl.getText());
 //            stream.getCameraControl().setLeftControl(leftControl.getText());
@@ -407,6 +411,14 @@ public class Controller implements Initializable {
                     }
                 }
                     stream.setIsPreviewed(preview.isSelected());
+            }
+            if(stream.getCameraControl()!=null && !control.isSelected()){
+                stream.setCameraControl(null);
+                //TODO
+            }
+            else if(stream.getCameraControl()==null && control.isSelected()){
+                stream.setCameraControl(new CameraControl(stream.getStreamPath()));
+                //TODO
             }
             try {
                 stream.setIsMotionDetected(detect.isSelected());

@@ -33,8 +33,9 @@ public class StreamGet {
         this.recordLoop = RecordLoop;
         this.cameraControl = CAmeraControl;
     }
-    private final CameraControl cameraControl;
+    private CameraControl cameraControl;
     public CameraControl getCameraControl(){return cameraControl;}
+    public void setCameraControl(CameraControl control){this.cameraControl = control;}
 
     private final int recordLoop;
     public int getRecordLoop(){return recordLoop; }
